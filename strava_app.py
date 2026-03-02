@@ -327,7 +327,7 @@ CLIENT_ID = os.environ.get("STRAVA_CLIENT_ID")
 CLIENT_SECRET = os.environ.get("STRAVA_CLIENT_SECRET")
 REDIRECT_URI = os.environ.get(
     "REDIRECT_URI",
-    "http://127.0.0.1:5000/auth/strava/callback",  # local default
+    "https://strava-challenge-2026.onrender.com/auth/strava/callback",  # local default
 )
 
 # Optional local fallbacks (you can remove these if you want to force env vars)
