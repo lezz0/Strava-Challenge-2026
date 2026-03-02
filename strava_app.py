@@ -59,15 +59,24 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    # params = {
+    #     "client_id": CLIENT_ID,
+    #     "redirect_uri": REDIRECT_URI,
+    #     "response_type": "code",
+    #     "approval_prompt": "auto",
+    #     "scope": "read,activity:read,activity:read_all",
+    # }
+    # auth_link = f"{STRAVA_AUTH_URL}?{urlencode(params)}"
+    # return f'<a href="{auth_link}">Connect Strava</a>'
     params = {
         "client_id": CLIENT_ID,
-        "redirect_uri": REDIRECT_URI,
         "response_type": "code",
-        "approval_prompt": "auto",
+        "redirect_uri": REDIRECT_URI,
         "scope": "read,activity:read,activity:read_all",
     }
-    auth_link = f"{STRAVA_AUTH_URL}?{urlencode(params)}"
+    auth_link = "https://www.strava.com/oauth/authorize?" + urlencode(params)
     return f'<a href="{auth_link}">Connect Strava</a>'
+
 
 @app.route("/auth/strava/callback")
 def strava_callback():
