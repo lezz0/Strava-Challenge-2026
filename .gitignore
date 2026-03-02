@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+*.json # so your Google key does not go to GitHub
+strava-automation-489013-2501a54777ce.json
+venv/
+__pycache__/
+*.pyc
+strava-automation-489013-2501a54777ce.json
+venv/
+__pycache__/
+*.pyc
