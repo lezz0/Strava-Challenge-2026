@@ -611,10 +611,12 @@ def index():
 <body>
     <h1>2026 Fitness Challenge</h1>
     <p>Connect your Strava account to sync your activities to the challenge leaderboard.</p>
-    <a href="AUTH_LINK">
-        <img src="https://developers.strava.com/images/btn_strava_connectwith_orange.svg"
-             alt="Connect with Strava" width="193" height="48"/>
+    <a href="AUTH_LINK" style="display:inline-block; background-color:#FC4C02; color:white;
+       padding:12px 24px; border-radius:4px; text-decoration:none; font-size:16px;
+       font-weight:bold; font-family:Arial,sans-serif;">
+        Connect with Strava
     </a>
+
     <p class="powered">Powered by <a href="https://www.strava.com">Strava</a></p>
 </body>
 </html>"""
