@@ -369,16 +369,62 @@ def index():
     auth_link = STRAVA_AUTH_URL + "?" + urlencode(params)
     return f'<a href="{auth_link}">Connect Strava</a>'
 
+@app.route("/")
+def index():
+    params = {
+        "client_id": CLIENT_ID,
+        "response_type": "code",
+        "redirect_uri": REDIRECT_URI,
+        "scope": "read,activity:read,activity:read_all",
+    }
+    auth_link = STRAVA_AUTH_URL + "?" + urlencode(params)
+    return f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>2026 Fitness Challenge</title>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+                background-color: #f5f5f5;
+            }}
+            h1 {{ color: #333; }}
+            p {{ color: #666; max-width: 400px; text-align: center; }}
+            .powered {{
+                margin-top: 40px;
+                font-size: 12px;
+                color: #999;
+            }}
+            .powered a {{ color: #FC4C02; text-decoration: none; }}
+        </style>
+    </head>
+    <body>
+        <h1>2026 Fitness Challenge</h1>
+        <p>Connect your Strava account to sync your activities to the challenge leaderboard.</p>
+        <a href="{auth_link}">
+            <img src="https://developers.strava.com/images/btn_strava_connectwith_orange.svg"
+                 alt="Connect with Strava" width="193" height="48"/>
+        </a>
+        <p class="powered">Powered by <a href="https://www.strava.com">Strava</a></p>
+    </body>
+    </html>
+    """
 
-@app.route("/auth/strava/callback")
-def strava_callback():
-    error = request.args.get("error")
-    if error:
-        return f"Error from Strava: {error}", 400
+# @app.route("/auth/strava/callback")
+# def strava_callback():
+#     error = request.args.get("error")
+#     if error:
+#         return f"Error from Strava: {error}", 400
 
-    code = request.args.get("code")
-    if not code:
-        return "No code provided", 400
+#     code = request.args.get("code")
+#     if not code:
+#         return "No code provided", 400
 
     # 1) Exchange code for token
     token_resp = requests.post(
