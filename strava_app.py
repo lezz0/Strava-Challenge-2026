@@ -651,6 +651,9 @@ def strava_callback():
           ("athlete", {}).get("id"))
     access_token = token_data["access_token"]
 
+    token_scope = token_data.get("scope", "")
+    print(f"DEBUG: token scope = {token_scope}, athlete = {display_name}")
+
     athlete = token_data.get("athlete", {})
     athlete_id = athlete.get("id")
     athlete_firstname = athlete.get("firstname") or ""
@@ -688,12 +691,13 @@ def strava_callback():
         )
         resp.raise_for_status()
         batch = resp.json()
+        if isinstance(batch, dict) and batch.get("message"):
+            return f"Strava API error: {batch}", 500
         if not batch:
             break
         activities.extend(batch)
         page += 1
 
-    detailed_rows = []
 
     # 4) For each activity, get details and build rows
     for a in activities:
