@@ -647,6 +647,8 @@ def strava_callback():
     )
     token_resp.raise_for_status()
     token_data = token_resp.json()
+    print("TOKEN DATA:", token_data.get("scope"), "athlete:", token_data.get
+          ("athlete", {}).get("id"))
     access_token = token_data["access_token"]
 
     athlete = token_data.get("athlete", {})
